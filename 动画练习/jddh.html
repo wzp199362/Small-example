@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单动画练习</title>
+	<style>
+	             *{
+	             	margin: 0px;
+	             	padding:0px;
+	             }
+	             .partion{
+	             	position: relative;
+	             	height: 300px;
+	             }
+		.red{
+			width: 300px;
+			height: 200px;
+			background-color: red;
+			position: absolute;
+			top:0;bottom: 0;
+			margin: auto;
+			left: -300px;
+		}
+		.blue{
+			width: 30px;
+			height: 60px;
+			position: relative;
+			left: 300px;
+			top: 70px;
+			display: block;
+			background-color: blue;
+			text-align: center;
+			line-height: 30px;
+			color: #fff;
+
+		}
+		
+		.opacity{
+			width: 300px;
+			height: 200px;
+			right: 0;
+			position: absolute;
+			top: 0;bottom: 0;
+			margin: auto;
+			background-color: red;
+			color: #fff;
+			font-size: 30px;
+			line-height: 200px;
+			text-align: center;
+			opacity: 0.3;
+		}
+		.vpspeed{
+			width: 300px;
+			height: 200px;
+			background-color: red;
+			position: absolute;
+			left: -300px;
+		}
+		.blue1{
+			width: 30px;
+			height: 60px;
+			position: relative;
+			left: 300px;
+			top: 70px;
+			display: block;
+			background-color: blue;
+			text-align: center;
+			line-height: 30px;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div class="partion" id="partion">
+		<div class="red" id="red"><span class="blue">匀速</span></div>
+		<div class="opacity" id="opacity">透明度演示</div>
+	</div>
+             <div class="vpspeed" id="vpspeed"><span class="blue1">缓冲</span></div>
+<script>
+	
+  	window.onload = function(){
+  		var  red = document.getElementById('red'),
+  		       opacitys =document.getElementById('opacity');
+  		       vpspeed =document.getElementById('vpspeed');
+  		   // 匀速效果
+  		   red.onmouseover=function(){
+  		   	doMove(0);
+  		   }
+  		  red.onmouseout=function(){
+  		  	doMove(-300);
+  		  }
+  		  // 透明度变化
+  		  opacitys.onmouseover=function(){
+  		  	change(1);
+  		  }
+  		  opacitys.onmouseout=function(){
+  		  	change(0.3);
+  		  }
+  		  // 缓冲动画
+  		  vpspeed.onmouseover= function(){
+  		  	vpspeeds(0);
+  		  }
+  		  vpspeed.onmouseout=function(){
+  		  	vpspeeds(-300);
+  		  }
+
+  	}
+  	var timer = null;
+  	function doMove(iTarget){
+  		clearInterval(timer);
+  		var  red = document.getElementById('red');
+  	   	timer=setInterval(function(){
+  	   		var speed =0;
+  	   		if(red.offsetLeft > iTarget){
+  	   			speed = -10;
+  	   		}else{
+  	   			speed =10;
+  	   		};
+
+  			if(red.offsetLeft ==iTarget){
+  				clearInterval(timer);
+  			}else{
+  				red.style.left = red.offsetLeft+speed+'px';
+  			}
+  		},3)		
+  	}
+  	var alpha =0.3;
+  	function change(iTarget){
+  		clearInterval(timer);
+  		var opacitys =document.getElementById('opacity');
+  		timer = setInterval(function(){
+  			 var speed =0;
+  			if(alpha>iTarget){
+  				speed= -0.01;
+  			}else{
+  				speed=0.01;
+  			}
+  			if(alpha== iTarget){
+  				clearInterval(timer);
+  			}else{
+  				alpha +=speed;
+  				opacitys.style.opacity = alpha;
+  			}
+  		},3)
+  	}
+
+  	function vpspeeds(iTarget){
+  		clearInterval(timer);
+  		var  vpspeed = document.getElementById('vpspeed');
+  	   	timer=setInterval(function(){
+  	   		var speed =(iTarget - vpspeed.offsetLeft)/20;
+  	   		speed =speed>0?Math.ceil(speed):Math.floor(speed);
+  			if(vpspeed.offsetLeft ==iTarget){
+  				clearInterval(timer);
+  			}else{
+  				vpspeed.style.left = vpspeed.offsetLeft+speed+'px';
+  			}
+  		},30)		
+  	}
+</script>
+</body>
+</html>

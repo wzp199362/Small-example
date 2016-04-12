@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>shiyan</title>
+	<style>
+	*{
+		margin: 0px;
+		padding:0px;
+	}
+		.shi{
+			width: 300px;
+			height: 150px;
+			background-color: blue;
+			border: 2px solid  #000;
+			opacity: 0.3;
+		}
+	</style>
+</head>
+<body>
+	<div class="shi" id="shi"></div>
+	<script type="text/javascript" src="move.js"></script>
+	<script>
+   	window.onload = function(){
+   		var shi = document.getElementById('shi');
+   		shi.onmouseover=function(){
+   			aMove(shi,{width:310,height:300,opacity:100})
+	   	}
+	   	shi.onmouseout=function(){
+   			aMove(shi,{width:300,height:150,opacity:30})
+	   	}
+	   }
+	</script>
+</body>
+</html>
